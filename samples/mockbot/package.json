@@ -1,0 +1,20 @@
+{
+  "name": "techdemo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "mocha spec",
+    "ngrok": "ngrok http 45100"
+  },
+  "botium": {
+    "convodirs": [
+      "spec/convo"
+    ],
+    "expandConvos": true,
+    "expandUtterancesToConvos": false
+  },
+  "devDependencies": {
+    "botium-bindings": "latest",
+    "botium-connector-botframework": "../../",
+    "mocha": "latest"
+  }
+}

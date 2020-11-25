@@ -1,0 +1,12 @@
+{
+  "botium": {
+    "Capabilities": {
+      "PROJECTNAME": "Botium Project Bot Framework",
+      "CONTAINERMODE": "botframework",
+      "BOTFRAMEWORK_ENDPOINTURL": "http://127.0.0.1:3978/api/messages",
+      "BOTFRAMEWORK_SERVICEURL": "http://127.0.0.1:45100/",
+      "SIMPLEREST_INBOUND_PORT": 45100,
+      "SIMPLEREST_INBOUND_ENDPOINT": "/"
+    }
+  }
+}

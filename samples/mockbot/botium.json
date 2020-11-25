@@ -1,0 +1,12 @@
+{
+  "botium": {
+    "Capabilities": {
+      "PROJECTNAME": "Botium Project Bot Framework",
+      "CONTAINERMODE": "botframework",
+      "BOTFRAMEWORK_ENDPOINTURL": "https://demo.botiumbox.com/mockbot/api/messages",
+      "BOTFRAMEWORK_SERVICEURL": "https://3ea66196ceda.ngrok.io",
+      "SIMPLEREST_INBOUND_PORT": 45100,
+      "SIMPLEREST_INBOUND_ENDPOINT": "/"
+    }
+  }
+}
