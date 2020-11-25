@@ -78,7 +78,7 @@ Bot Framework Endpoint URL, typically ending in _/api/messages_
 ### BOTFRAMEWORK_SERVICEURL
 The URL where the Botium Inbound Url is available, as seen from the Bot Framework app
 
-### BOTFRAMEWORK_APP_ID BOTFRAMEWORK_APP_SECRET
+### BOTFRAMEWORK_APP_ID and BOTFRAMEWORK_APP_SECRET
 If your Bot Framework app runs with app id and app secret, Botium will create an authorization token.
 
 ### BOTFRAMEWORK_CHANNELID

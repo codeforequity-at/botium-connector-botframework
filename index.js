@@ -10,40 +10,58 @@ module.exports = {
     },
     capabilities: [
       {
-        name: 'RASA_ENDPOINT_URL',
-        label: 'HTTP(S) endpoint URL of your Rasa chatbot host',
-        description: 'URL without endpoint path',
+        name: 'BOTFRAMEWORK_ENDPOINTURL',
+        label: 'Bot Framework Endpoint URL',
+        description: 'Bot Framework Endpoint URL, typically ending in "/api/messages"',
         type: 'url',
         required: true
       },
       {
-        name: 'RASA_MODE',
-        label: 'Rasa Endpoint',
-        description: 'Choose between conversational flow testing or NLU testing',
-        type: 'choice',
-        required: false,
-        choices: [
-          { key: 'DIALOG_AND_NLU', name: 'Rasa dialogue and NLU engine' },
-          { key: 'REST_INPUT', name: 'Rasa Core (dialogue engine only)' },
-          { key: 'NLU_INPUT', name: 'Rasa NLU (NLU engine only)' }
-        ]
-      },
-      {
-        name: 'RASA_ENDPOINT_PING_URL',
-        label: 'HTTP(S) endpoint to ping before start',
-        type: 'url',
+        name: 'BOTFRAMEWORK_APP_ID',
+        label: 'Microsoft App Id',
+        description: 'If your Bot Framework app runs with app id and app secret, Botium will create an authorization token.',
+        type: 'string',
         required: false
       },
       {
-        name: 'RASA_ENDPOINT_TOKEN',
-        label: 'Token for Token Authentication',
+        name: 'BOTFRAMEWORK_APP_SECRET',
+        label: 'Microsoft App Secret',
         type: 'secret',
         required: false
       },
       {
-        name: 'RASA_ENDPOINT_JWT',
-        label: 'JWT Token for JWT Authentication',
-        type: 'secret',
+        name: 'BOTFRAMEWORK_RECIPIENTID',
+        label: 'Bot id',
+        description: 'If not given a random id will be used',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'BOTFRAMEWORK_RECIPIENTNAME',
+        label: 'Bot name',
+        description: 'Default "Bot"',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'BOTFRAMEWORK_MEMBERID',
+        label: 'Member id used for Botium',
+        description: 'If not given a random id will be used',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'BOTFRAMEWORK_MEMBERNAME',
+        label: 'Member name used for Botium',
+        description: 'Default "Botium"',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'BOTFRAMEWORK_CHANNELID',
+        label: 'Bot Framework Channel',
+        description: 'Default "emulator"',
+        type: 'string',
         required: false
       }
     ]
