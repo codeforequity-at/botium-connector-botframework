@@ -17,6 +17,13 @@ module.exports = {
         required: true
       },
       {
+        name: 'BOTFRAMEWORK_SERVICEURL',
+        label: 'Inbound Endpoint URL',
+        description: 'Inbound Endpoint used as Bot Framework Service URL',
+        type: 'inboundurl',
+        required: true
+      },
+      {
         name: 'BOTFRAMEWORK_APP_ID',
         label: 'Microsoft App Id',
         description: 'If your Bot Framework app runs with app id and app secret, Botium will create an authorization token.',
