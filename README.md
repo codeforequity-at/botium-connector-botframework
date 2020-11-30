@@ -2,7 +2,7 @@
 
 [![NPM](https://nodei.co/npm/botium-connector-botframework.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/botium-connector-botframework/)
 
-[![Codeship Status for codeforequity-at/botium-connector-botframework](https://app.codeship.com/projects/b026e4e0-f835-4c2f-8905-1e36d8d6e022/status?branch=master)](https://app.codeship.com/projects/419747)
+[![Codeship Status for codeforequity-at/botium-connector-botframework](https://app.codeship.com/projects/b026e4e0-f835-4c2f-8905-1e36d8d6e022/status?branch=main)](https://app.codeship.com/projects/419747)
 [![npm version](https://badge.fury.io/js/botium-connector-botframework.svg)](https://badge.fury.io/js/botium-connector-botframework)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
@@ -16,7 +16,7 @@ Botium connects to your Bot Framework endpoint and receives responses with the _
 It can be used as any other Botium connector with all Botium Stack components:
 * [Botium CLI](https://github.com/codeforequity-at/botium-cli/)
 * [Botium Bindings](https://github.com/codeforequity-at/botium-bindings/)
-* [Botium Box](https://www.botium.at)
+* [Botium Box](https://www.botium.ai)
 
 ## Requirements
 * **Node.js and NPM**
