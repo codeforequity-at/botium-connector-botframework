@@ -58,7 +58,7 @@ class BotiumConnectorBotFramework {
           serviceUrl: this.caps[Capabilities.BOTFRAMEWORK_SERVICEURL],
           conversation: {
             id: '{{botium.conversationId}}',
-            name: 'hugo'
+            name: '{{fnc.testcasename}}'
           },
           id: '{{fnc.uniqid}}',
           membersAdded: [{
@@ -266,10 +266,6 @@ class BotiumConnectorBotFramework {
   }
 
   async Build () {
-    await this.delegateContainer.Build()
-  }
-
-  async Start () {
     if (this.caps[Capabilities.BOTFRAMEWORK_APP_ID]) {
       try {
         const tokenResponse = await request({
@@ -291,6 +287,10 @@ class BotiumConnectorBotFramework {
         throw new Error(`Failed to generate bot connector token for app ${this.caps[Capabilities.BOTFRAMEWORK_APP_ID]}: ${err.message}`)
       }
     }
+    await this.delegateContainer.Build()
+  }
+
+  async Start () {
     await this.delegateContainer.Start()
   }
 
