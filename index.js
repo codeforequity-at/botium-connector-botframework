@@ -7,6 +7,7 @@ module.exports = {
     name: 'Bot Framework',
     provider: 'Microsoft',
     features: {
+      sendAttachments: true
     },
     capabilities: [
       {
@@ -68,6 +69,20 @@ module.exports = {
         name: 'BOTFRAMEWORK_CHANNELID',
         label: 'Bot Framework Channel',
         description: 'Default "emulator"',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'BOTFRAMEWORK_BUTTON_TYPE',
+        label: 'Button Activity Type',
+        description: 'Default "event"',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'BOTFRAMEWORK_BUTTON_VALUE_FIELD',
+        label: 'Button Activity Value Field',
+        description: 'Default "name"',
         type: 'string',
         required: false
       }

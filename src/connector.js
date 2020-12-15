@@ -43,8 +43,6 @@ class BotiumConnectorBotFramework {
   Validate () {
     debug('Validate called')
 
-    this.caps = Object.assign({}, Defaults, this.caps)
-
     if (!this.caps[Capabilities.BOTFRAMEWORK_ENDPOINTURL]) throw new Error('BOTFRAMEWORK_ENDPOINTURL capability required')
     if (!this.caps[Capabilities.BOTFRAMEWORK_SERVICEURL]) throw new Error('BOTFRAMEWORK_SERVICEURL capability required')
 
@@ -59,7 +57,7 @@ class BotiumConnectorBotFramework {
         SIMPLEREST_START_BODY: JSON.stringify({
           type: 'conversationUpdate',
           timestamp: '{{fnc.now_ISO}}',
-          channelId: this.caps[Capabilities.BOTFRAMEWORK_CHANNELID],
+          channelId: this.caps[Capabilities.BOTFRAMEWORK_CHANNELID] || Defaults.BOTFRAMEWORK_CHANNELID,
           serviceUrl: this.caps[Capabilities.BOTFRAMEWORK_SERVICEURL],
           conversation: {
             id: '{{botium.conversationId}}',
@@ -68,17 +66,17 @@ class BotiumConnectorBotFramework {
           id: '{{fnc.uniqid}}',
           membersAdded: [{
             id: this.memberId,
-            name: this.caps[Capabilities.BOTFRAMEWORK_MEMBERNAME],
+            name: this.caps[Capabilities.BOTFRAMEWORK_MEMBERNAME] || Defaults.BOTFRAMEWORK_MEMBERNAME,
             role: 'user'
           }],
           membersRemoved: [],
           from: {
             id: this.memberId,
-            name: this.caps[Capabilities.BOTFRAMEWORK_MEMBERNAME]
+            name: this.caps[Capabilities.BOTFRAMEWORK_MEMBERNAME] || Defaults.BOTFRAMEWORK_MEMBERNAME
           },
           recipient: {
             id: this.recipientId,
-            name: this.caps[Capabilities.BOTFRAMEWORK_RECIPIENTNAME],
+            name: this.caps[Capabilities.BOTFRAMEWORK_RECIPIENTNAME] || Defaults.BOTFRAMEWORK_RECIPIENTNAME,
             role: 'bot'
           }
         }),
@@ -88,7 +86,7 @@ class BotiumConnectorBotFramework {
         SIMPLEREST_BODY_TEMPLATE: {
           type: 'message',
           timestamp: '{{fnc.now_ISO}}',
-          channelId: this.caps[Capabilities.BOTFRAMEWORK_CHANNELID],
+          channelId: this.caps[Capabilities.BOTFRAMEWORK_CHANNELID] || Defaults.BOTFRAMEWORK_CHANNELID,
           serviceUrl: this.caps[Capabilities.BOTFRAMEWORK_SERVICEURL],
           conversation: {
             id: '{{botium.conversationId}}',
@@ -97,12 +95,12 @@ class BotiumConnectorBotFramework {
           id: '{{botium.stepId}}',
           from: {
             id: this.memberId,
-            name: this.caps[Capabilities.BOTFRAMEWORK_MEMBERNAME],
+            name: this.caps[Capabilities.BOTFRAMEWORK_MEMBERNAME] || Defaults.BOTFRAMEWORK_MEMBERNAME,
             role: 'user'
           },
           recipient: {
             id: this.recipientId,
-            name: this.caps[Capabilities.BOTFRAMEWORK_RECIPIENTNAME],
+            name: this.caps[Capabilities.BOTFRAMEWORK_RECIPIENTNAME] || Defaults.BOTFRAMEWORK_RECIPIENTNAME,
             role: 'bot'
           },
           text: '{{msg.messageText}}'
@@ -114,9 +112,9 @@ class BotiumConnectorBotFramework {
               payload = JSON.parse(payload)
             } catch (err) {
             }
-            requestOptions.body.type = this.caps[Capabilities.BOTFRAMEWORK_BUTTON_TYPE]
+            requestOptions.body.type = this.caps[Capabilities.BOTFRAMEWORK_BUTTON_TYPE] || Defaults.BOTFRAMEWORK_BUTTON_TYPE
             delete requestOptions.body.text
-            _.set(requestOptions.body, this.caps[Capabilities.BOTFRAMEWORK_BUTTON_VALUE_FIELD], payload)
+            _.set(requestOptions.body, this.caps[Capabilities.BOTFRAMEWORK_BUTTON_VALUE_FIELD] || Defaults.BOTFRAMEWORK_BUTTON_VALUE_FIELD, payload)
           }
           if (msg.forms) {
             requestOptions.body.value = requestOptions.body.value || {}
