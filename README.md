@@ -68,6 +68,19 @@ Create a botium.json with the the URL of your Bot Framework endpoint in your pro
 
 tbd
 
+## Finetuning Bot Framework Activity
+
+For finetuning the [Activity object](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#activity-object) sent to your bot, you can use the [UPDATE_CUSTOM logic hook](https://botium-docs.readthedocs.io/en/latest/05_botiumscript/index.html?#update-custom). This example will add some custom values to the [channelData](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-channeldata?view=azure-bot-service-4.0):
+
+    #me
+    do some channel specific thingy ...
+    UPDATE_CUSTOM SET_ACTIVITY_VALUE|channelData|{"channelData1": "botium", "channelData2": "something else"}
+
+The parameters are:
+1. SET_ACTIVITY_VALUE
+2. The path to the activity field
+3. The value of the activity field
+
 ## Supported Capabilities
 
 Set the capability __CONTAINERMODE__ to __botframework__ to activate this connector.
@@ -95,3 +108,15 @@ _Default: generated unique id_
 
 ### BOTFRAMEWORK_MEMBERNAME
 _Default: Botium_
+
+### BOTFRAMEWORK_BUTTON_TYPE and BOTFRAMEWORK_BUTTON_VALUE_FIELD
+_Default type: event_
+
+_Default field: name_
+
+Activity fields to use for simulating button clicks by the user. Depending on your implementation, you maybe have to change the activity type or the field to use - see [here](https://docs.microsoft.com/en-us/azure/bot-service/nodejs/bot-builder-nodejs-backchannel) for some ideas.
+
+Usually, the activity type is _event_, and the button value is submitted in the _name_ field, but using those capabilities you can adapt it to your implementation.
+
+_Note: if you want to disable this, then set BOTFRAMEWORK_BUTTON_TYPE to "message" and BOTFRAMEWORK_BUTTON_VALUE_FIELD to "text", to make the button clicks appear as normal user text input_
+

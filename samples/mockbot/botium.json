@@ -5,8 +5,19 @@
       "CONTAINERMODE": "botframework",
       "BOTFRAMEWORK_ENDPOINTURL": "https://demo.botiumbox.com/mockbot/api/messages",
       "BOTFRAMEWORK_SERVICEURL": "https://xxxxxx.ngrok.io",
+      "BOTFRAMEWORK_BUTTON_TYPE": "message",
+      "BOTFRAMEWORK_BUTTON_VALUE_FIELD": "text",
       "SIMPLEREST_INBOUND_PORT": 45100,
-      "SIMPLEREST_INBOUND_ENDPOINT": "/"
+      "SIMPLEREST_INBOUND_ENDPOINT": "/",
+      "USER_INPUTS": [
+        {
+          "ref": "MEDIA",
+          "src": "MediaInput",
+          "args": {
+            "downloadMedia": true
+          }
+        }
+      ]
     }
   }
 }

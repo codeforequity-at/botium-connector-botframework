@@ -1,4 +1,5 @@
 const util = require('util')
+const path = require('path')
 const mime = require('mime-types')
 const randomize = require('randomatic')
 const request = require('request-promise-native')
@@ -16,12 +17,16 @@ const Capabilities = {
   BOTFRAMEWORK_RECIPIENTID: 'BOTFRAMEWORK_RECIPIENTID',
   BOTFRAMEWORK_RECIPIENTNAME: 'BOTFRAMEWORK_RECIPIENTNAME',
   BOTFRAMEWORK_MEMBERID: 'BOTFRAMEWORK_MEMBERID',
-  BOTFRAMEWORK_MEMBERNAME: 'BOTFRAMEWORK_MEMBERNAME'
+  BOTFRAMEWORK_MEMBERNAME: 'BOTFRAMEWORK_MEMBERNAME',
+  BOTFRAMEWORK_BUTTON_TYPE: 'BOTFRAMEWORK_BUTTON_TYPE',
+  BOTFRAMEWORK_BUTTON_VALUE_FIELD: 'BOTFRAMEWORK_BUTTON_VALUE_FIELD'
 }
 const Defaults = {
   [Capabilities.BOTFRAMEWORK_CHANNELID]: 'emulator',
   [Capabilities.BOTFRAMEWORK_RECIPIENTNAME]: 'Bot',
-  [Capabilities.BOTFRAMEWORK_MEMBERNAME]: 'Botium'
+  [Capabilities.BOTFRAMEWORK_MEMBERNAME]: 'Botium',
+  [Capabilities.BOTFRAMEWORK_BUTTON_TYPE]: 'event',
+  [Capabilities.BOTFRAMEWORK_BUTTON_VALUE_FIELD]: 'name'
 }
 
 class BotiumConnectorBotFramework {
@@ -101,6 +106,41 @@ class BotiumConnectorBotFramework {
             role: 'bot'
           },
           text: '{{msg.messageText}}'
+        },
+        SIMPLEREST_REQUEST_HOOK: ({ requestOptions, msg }) => {
+          if (msg.buttons && msg.buttons.length > 0 && (msg.buttons[0].text || msg.buttons[0].payload)) {
+            let payload = msg.buttons[0].payload || msg.buttons[0].text
+            try {
+              payload = JSON.parse(payload)
+            } catch (err) {
+            }
+            requestOptions.body.type = this.caps[Capabilities.BOTFRAMEWORK_BUTTON_TYPE]
+            delete requestOptions.body.text
+            _.set(requestOptions.body, this.caps[Capabilities.BOTFRAMEWORK_BUTTON_VALUE_FIELD], payload)
+          }
+          if (msg.forms) {
+            requestOptions.body.value = requestOptions.body.value || {}
+            msg.forms.forEach(f => {
+              _.set(requestOptions.body.value, f.name, f.value)
+            })
+          }
+          if (msg.SET_ACTIVITY_VALUE) {
+            _.keys(msg.SET_ACTIVITY_VALUE).forEach(key => {
+              _.set(requestOptions.body, key, msg.SET_ACTIVITY_VALUE[key])
+            })
+          }
+          if (msg.media && msg.media.length > 0) {
+            requestOptions.body.attachments = msg.media.map(attachment => {
+              if (!attachment.buffer) throw new Error(`Media attachment ${attachment.mediaUri} not downloaded`)
+              if (!attachment.mimeType) throw new Error(`Media attachment ${attachment.mediaUri} no mime type given`)
+
+              return {
+                contentType: attachment.mimeType,
+                contentUrl: `data:${attachment.mimeType};base64,${attachment.buffer.toString('base64')}`,
+                name: path.basename(attachment.mediaUri)
+              }
+            })
+          }
         },
         SIMPLEREST_RESPONSE_JSONPATH: '$.text',
         SIMPLEREST_RESPONSE_HOOK: ({ botMsg }) => {
