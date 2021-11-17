@@ -7,7 +7,8 @@ module.exports = {
     name: 'Bot Framework',
     provider: 'Microsoft',
     features: {
-      sendAttachments: true
+      sendAttachments: true,
+      securityTesting: true
     },
     capabilities: [
       {

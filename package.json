@@ -1,6 +1,6 @@
 {
   "name": "botium-connector-botframework",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Botium Connector for Bot Framework Endpoints",
   "main": "dist/botium-connector-botframework-cjs.js",
   "module": "dist/botium-connector-botframework-es.js",
